@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ওগো...!</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&display=swap');
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  font-family: 'Noto Serif Bengali', serif;
+  background: radial-gradient(circle at 50% 30%, #ffb6c1, #ff69b4, #c71585);
+  position: relative;
+  transform: scale(0.95);
+  transform-origin: center;
+}
+
+/* BLOOMING ROSE */
+#bloomRose {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%) scale(0);
+  background: radial-gradient(circle at center, #ff0011, #90000f);
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(255,0,17,0.8);
+  animation: bloom 3s forwards;
+  z-index: 2;
+}
+@keyframes bloom {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(0.6); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  font-size: clamp(1.8em,5vw,3.2em);
+  color: #fff;
+  margin-top: 6vh;
+  text-shadow: 0 0 20px #ff007f,0 0 40px #ff80bf;
+  z-index: 5;
+  position: relative;
+  opacity: 1;
+}
+
+/* MESSAGES */
+.message {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 18vh;
+  font-size: clamp(2em, 2.8vw, 1.5em);
+  color: #fff;
+  text-shadow: 0 0 15px #c71585;
+  opacity: 0;
+  transition: opacity 2s ease;
+  z-index: 5;
+  padding: 0 10px;
+}
+
+/* CHITI BUTTON */
+.chiti-btn {
+  position: absolute;
+  left: 50%;
+  top: 58vh;
+  transform: translateX(-50%);
+  font-size: clamp(3em, 3.8vw, 2.8em); /* 💌 বাটন সামান্য বড় */
+  background: linear-gradient(145deg, #fff, #ffb6c1);
+  border-radius: 50%;
+  width: clamp(90px,15vw,110px); /* ✅ আকার সামান্য বড় */
+  height: clamp(90px,15vw,110px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(255,105,180,0.6);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  animation: pulseBtn 2.5s infinite;
+  text-align: center;
+}
+.chiti-btn span {
+  font-size: clamp(0.6em, 1.8vw, 0.9em);
+  color: #c71585;
+  margin-top: 5px;
+  font-weight: bold;
+}
+.chiti-btn:hover { transform: translateX(-50%) scale(1.08); }
+@keyframes pulseBtn {
+  0%,100%{transform:translateX(-50%) scale(1);}
+  50%{transform:translateX(-50%) scale(1.1);}
+}
+
+/* LETTER MODAL */
+.letter-modal {
+  display: none;
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+}
+.letter-modal.show { display:flex; }
+.letter-content {
+  background: #fff;
+  padding: clamp(20px,4vw,30px);
+  border-radius:20px;
+  box-shadow:0 15px 60px rgba(255,105,180,0.6);
+  max-width:600px;
+  width:85%;
+  text-align:center;
+  color:#c71585;
+  font-size: clamp(0.9em,2.2vw,1.2em);
+  line-height:1.7;
+  animation: fadeIn 0.6s ease;
+  position: relative;
+}
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(-30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+.close-btn{
+  position:absolute;
+  top:12px; right:20px;
+  font-size: clamp(1.5em,3.5vw,2em);
+  color:#ff007f;
+  cursor:pointer;
+}
+
+/* CREDIT */
+.credit{
+  position:absolute;
+  bottom:10px; left:15px;
+  font-size: clamp(0.9em,1.5vw,1.1em);
+  color:#ffe6f2;
+  font-style:italic;
+  cursor:pointer;
+  z-index:20;
+  text-decoration: underline;
+}
+
+/* ✅ সব ডিভাইসে দৃশ্যমান লেখা */
+.footer {
+  position: fixed;
+  bottom: 18px;   /* আগে 6px ছিল, এখন উপরে তোলা */
+  left: 10px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.9rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  z-index: 9999;
+}
+
+/* MID HEARTS */
+.pulse-heart{
+  position:absolute;
+  font-size:8vw;
+  opacity:0.25;
+  animation:pulse 4s ease-in-out infinite;
+  z-index:1;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:0.25;}
+  50%{transform:scale(1.15);opacity:0.5;}
+}
+
+/* SMALL HEARTS */
+.fly-heart{
+  position:absolute;
+  font-size:2.5vw;
+  animation: floatUp 10s linear infinite;
+  opacity:0.6;
+}
+@keyframes floatUp{
+  0%{transform:translateY(100vh) scale(1);opacity:0.6;}
+  100%{transform:translateY(-10vh) scale(1.3);opacity:0.2;}
+}
+</style>
+</head>
+<body>
+
+<!-- BLOOMING ROSE -->
+<div id="bloomRose"></div>
+
+<div class="title">ওগো...!</div>
+<div class="message">তুমি সুন্দর তাই চেয়ে থাকি প্রিয়! সে কি মোর অপরাধ?</div>
+<div class="message">তুমি অনুপস্থিত! তোমার অনুপস্থিতি কেন উপস্থিত?</div>
+
+<div class="chiti-btn" id="letterBtn">
+  💌
+  <span></span>
+</div>
+
+<div class="letter-modal" id="letterModal">
+  <div class="letter-content">
+    <div class="close-btn" id="closeBtn">&times;</div>
+    <h2>ওহে চাঁদমুখী!</h2>
+    <p>আমার মনে হয়, প্রতিদিনের আলোও তোমার হাসির কাছে হার মানে।<br>
+    তোমার চোখে এমন এক শান্ত আলো আছে, যা অন্ধকারকেও রঙিন করে তোলে।<br>
+    তোমার কথা ভাবলেই আমার হৃদয় যেন মধুর সুরে বাঁধা পড়ে,
+    আর প্রতিটি মুহূর্ত তোমার উপস্থিতিতে পূর্ণ হয়ে ওঠে।</p>
+
+    <p>প্রতিটি সকাল তোমার স্মৃতিতে জাগে,<br>
+    প্রতিটি রাত তোমার হাসিতে শেষ হয়।<br>
+    তুমি না থাকলে দিনটা যেন অসম্পূর্ণ কবিতার মতো লাগে— যেখানে ছন্দ আছে, কিন্তু প্রাণ নেই।</p>
+
+    <p>আমি কেবল এটুকুই বলতে চাই যে,<br>
+    তোমার প্রতি আমার অনুভূতিগুলো যতটা নীরব, ততটাই গভীর এবং সত্য।<br>
+    তুমি আমার জীবনের সেই বিশেষ মানুষ, যার জন্য প্রতিটি দিন আরও সুন্দরভাবে বাঁচতে ইচ্ছে করে।</p>
+
+    <p>মধুর স্নেহ ও নিঃশব্দ ভালোবাসায়...</p>
+  </div>
+</div>
+
+<!-- Developed by Tanjel -->
+<p style="
+  position: fixed;
+  bottom: 18px;
+  left: 10px;
+  color: white;
+  font-size: 12px;
+  opacity: 1;
+  font-family: 'Times New Roman', serif;
+  z-index: 1000;
+  letter-spacing: 0.5px;
+">
+  Developed by 
+  <a href='https://www.facebook.com/mdtanjelur.rahman' target='_blank' style='color:#ffd1dc; font-weight:600; text-decoration:underline;'>
+    Tanjel
+  </a>
+</p>
+
+<script>
+// MID HEARTS
+const midHearts = ["💝","💘","❤️","💕"];
+for(let i=0;i<6;i++){
+  let h=document.createElement('div');
+  h.className='pulse-heart';
+  h.textContent=midHearts[Math.floor(Math.random()*midHearts.length)];
+  h.style.left=Math.random()*90+'vw';
+  h.style.top=Math.random()*80+'vh';
+  h.style.animationDelay=(Math.random()*3)+'s';
+  document.body.appendChild(h);
+}
+
+// SMALL HEARTS
+const smallHearts=["💞","💕","❤️","💘","🤍","💜","💙","💚","💝"];
+for(let i=0;i<30;i++){
+  let h=document.createElement('div');
+  h.className='fly-heart';
+  h.textContent=smallHearts[Math.floor(Math.random()*smallHearts.length)];
+  h.style.left=Math.random()*100+'vw';
+  h.style.animationDuration=(8+Math.random()*5)+'s';
+  h.style.animationDelay=(Math.random()*5)+'s';
+  document.body.appendChild(h);
+}
+
+// ROTATING MESSAGES
+const msgs=document.querySelectorAll('.message');
+let i=0;
+function rotateMsg(){
+  msgs.forEach(m=>m.style.opacity=0);
+  msgs[i].style.opacity=1;
+  i=(i+1)%msgs.length;
+}
+setTimeout(()=>{rotateMsg(); setInterval(rotateMsg,5000);}, 500);
+
+// LETTER MODAL
+const btn=document.getElementById('letterBtn');
+const modal=document.getElementById('letterModal');
+const close=document.getElementById('closeBtn');
+btn.addEventListener('click',()=>modal.classList.add('show'));
+close.addEventListener('click',()=>modal.classList.remove('show'));
+modal.addEventListener('click',(e)=>{if(e.target===modal)modal.classList.remove('show');});
+</script>
+
+</body>
+</html>
